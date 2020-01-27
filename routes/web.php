@@ -16,6 +16,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index');
 
+Route::get('usuarios', 'UsuariosController@index');
+Route::get('usuarios/create', 'UsuariosController@create');
+Route::get('usuarios/{obj}/edit', 'UsuariosController@edit')->name('usuarios.edit');
+
 //Cargar datos
 Route::get('cargarDatos', 'CargarDatosController@index')->name('cargar.datos');
 Route::get('cargarDatos/nuevo', 'CargarDatosController@nuevo');

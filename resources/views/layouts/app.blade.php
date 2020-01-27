@@ -33,6 +33,17 @@
 					<div class="sidebar-brand-text mx-3">SSEUL<sup>BETA</sup></div>
 				</a>
 
+				@if (Auth::user()->rol == \App\Models\User::ADMINISTRADOR)
+					<hr class="sidebar-divider">
+
+					<li class="nav-item">
+						<a class="nav-link" href="{{ url('usuarios') }}">
+							<i class="fas fa-fw fa-users"></i>
+							<span>Usuarios</span>
+						</a>
+					</li>
+				@endif
+
 				<hr class="sidebar-divider">
 
 				<li class="nav-item">
