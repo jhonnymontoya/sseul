@@ -13,15 +13,15 @@
 		</div>
 	@endif
 
-	{!! Form::open(['url' => 'usuarios/create', 'method' => 'post']) !!}
+	{!! Form::model($usuario, ['route' => ['usuarios.edit.put', $usuario], 'method' => 'put']) !!}
 	<div class="mb-12">
 		<div class="form-group">
 			<label class="control-label">
 				Nombre
 			</label>
-			{!! Form::text('nombre', null, ['class' => ['form-control', ($errors->has('nombre') ? 'is-invalid' : '')], 'autocomplete' => 'off', 'placeholder' => 'Nombre']) !!}
-			@if ($errors->has('nombre'))
-				<span class="invalid-feedback">{{ $errors->first('nombre') }}</span>
+			{!! Form::text('name', null, ['class' => ['form-control', ($errors->has('name') ? 'is-invalid' : '')], 'autocomplete' => 'off', 'placeholder' => 'Nombre']) !!}
+			@if ($errors->has('name'))
+				<span class="invalid-feedback">{{ $errors->first('name') }}</span>
 			@endif
 		</div>
 	</div>
@@ -43,9 +43,9 @@
 			<label class="control-label">
 				Correo electrónico
 			</label>
-			{!! Form::text('mail', null, ['class' => ['form-control', ($errors->has('mail') ? 'is-invalid' : '')], 'autocomplete' => 'off', 'placeholder' => 'Correo electrónico']) !!}
-			@if ($errors->has('mail'))
-				<span class="invalid-feedback">{{ $errors->first('mail') }}</span>
+			{!! Form::text('email', null, ['class' => ['form-control', ($errors->has('email') ? 'is-invalid' : '')], 'autocomplete' => 'off', 'placeholder' => 'Correo electrónico']) !!}
+			@if ($errors->has('email'))
+				<span class="invalid-feedback">{{ $errors->first('email') }}</span>
 			@endif
 		</div>
 	</div>
@@ -80,7 +80,7 @@
 
 	<div class="row">
 		<div class="col-md-1">
-			{!! Form::submit("Crear", ["class" => "btn btn-danger btn-sm"]) !!}
+			{!! Form::submit("Modificar", ["class" => "btn btn-danger btn-sm"]) !!}
 		</div>
 		<div class="col-md-1">
 			<a href="{{ url('usuarios') }}" class="btn btn-secondary btn-sm">Cancelar</a>

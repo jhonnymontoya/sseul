@@ -18,7 +18,9 @@ Route::get('/', 'HomeController@index');
 
 Route::get('usuarios', 'UsuariosController@index');
 Route::get('usuarios/create', 'UsuariosController@create');
+Route::post('usuarios/create', 'UsuariosController@post');
 Route::get('usuarios/{obj}/edit', 'UsuariosController@edit')->name('usuarios.edit');
+Route::put('usuarios/{obj}/edit', 'UsuariosController@edit')->name('usuarios.edit.put');
 
 //Cargar datos
 Route::get('cargarDatos', 'CargarDatosController@index')->name('cargar.datos');
