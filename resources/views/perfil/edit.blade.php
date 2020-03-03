@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-	<h3><i class="fa fa-users"></i> Usuarios</h3>
+	<h3><i class="fa fa-user"></i> Perfil</h3>
 
 	<br>
 
@@ -13,7 +13,7 @@
 		</div>
 	@endif
 
-	{!! Form::model($usuario, ['route' => ['usuarios.edit.put', $usuario], 'method' => 'put']) !!}
+	{!! Form::model($usuario, ['url' => 'perfil/edit', 'method' => 'put']) !!}
 	<div class="mb-12">
 		<div class="form-group">
 			<label class="control-label">
@@ -22,18 +22,6 @@
 			{!! Form::text('name', null, ['class' => ['form-control', ($errors->has('name') ? 'is-invalid' : '')], 'autocomplete' => 'off', 'placeholder' => 'Nombre']) !!}
 			@if ($errors->has('name'))
 				<span class="invalid-feedback">{{ $errors->first('name') }}</span>
-			@endif
-		</div>
-	</div>
-
-	<div class="mb-12">
-		<div class="form-group">
-			<label class="control-label">
-				Rol
-			</label>
-			{!! Form::select('rol', $roles, mb_convert_case($usuario->rol, MB_CASE_UPPER, "UTF-8"), ['class' => ['form-control', ($errors->has('rol') ? 'is-invalid' : '')], 'autocomplete' => 'off']) !!}
-			@if ($errors->has('rol'))
-				<span class="invalid-feedback">{{ $errors->first('rol') }}</span>
 			@endif
 		</div>
 	</div>
@@ -83,7 +71,7 @@
 			{!! Form::submit("Actualizar", ["class" => "btn btn-danger btn-sm"]) !!}
 		</div>
 		<div class="col-md-1">
-			<a href="{{ url('usuarios') }}" class="btn btn-secondary btn-sm">Cancelar</a>
+			<a href="{{ url('perfil') }}" class="btn btn-secondary btn-sm">Cancelar</a>
 		</div>
 	</div>
 	{!! Form::close() !!}

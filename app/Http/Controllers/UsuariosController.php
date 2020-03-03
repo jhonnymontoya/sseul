@@ -6,6 +6,7 @@ use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\Usuarios\CrearUsuarioRequest;
+use App\Http\Requests\Usuarios\EditUsuarioRequest;
 use Session;
 
 
@@ -37,7 +38,7 @@ class UsuariosController extends Controller
 		$usuario->name = $request->nombre;
 		$usuario->rol = $request->rol;
 		$usuario->email = $request->mail;
-		$usuario->password = bcrypt($request->password);
+		$usuario->password = $request->password;
 
 		$usuario->save();
 
@@ -53,6 +54,15 @@ class UsuariosController extends Controller
 			"ADMINISTRADOR" => 'Administrador'
 		];
 		return view("usuarios.edit")->withRoles($roles)->withUsuario($obj);
+	}
+
+	public function update(EditUsuarioRequest $request, User $obj) {
+		$this->verificarAdministrador();
+		$obj->fill($request->all());
+		$obj->save();
+
+		Session::flash("message", "Se ha actualizado el usuario '$obj->name'");
+		return redirect('usuarios');
 	}
 
 	private function verificarAdministrador() {

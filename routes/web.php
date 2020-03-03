@@ -16,11 +16,15 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index');
 
+Route::get('perfil', 'PerfilController@index');
+Route::get('perfil/edit', 'PerfilController@edit');
+Route::put('perfil/edit', 'PerfilController@update');
+
 Route::get('usuarios', 'UsuariosController@index');
 Route::get('usuarios/create', 'UsuariosController@create');
 Route::post('usuarios/create', 'UsuariosController@post');
 Route::get('usuarios/{obj}/edit', 'UsuariosController@edit')->name('usuarios.edit');
-Route::put('usuarios/{obj}/edit', 'UsuariosController@edit')->name('usuarios.edit.put');
+Route::put('usuarios/{obj}/edit', 'UsuariosController@update')->name('usuarios.edit.put');
 
 //Cargar datos
 Route::get('cargarDatos', 'CargarDatosController@index')->name('cargar.datos');

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Exception;
 
 class User extends Authenticatable
 {
@@ -19,7 +20,7 @@ class User extends Authenticatable
 	 * @var array
 	 */
 	protected $fillable = [
-		'name', 'email', 'password',
+		'name', 'email', 'rol', 'password',
 	];
 
 	/**
@@ -42,5 +43,30 @@ class User extends Authenticatable
 
 	public function setNameAttribute($value) {
 		$this->attributes["name"] = mb_convert_case($value,  MB_CASE_TITLE, "UTF-8");
+	}
+
+	public function setPasswordAttribute($value) {
+		if(!empty($value)) {
+			$this->attributes["password"] = bcrypt($value);
+		}
+	}
+
+	public function setRolAttribute($value) {
+		if(empty($value)) {
+			$this->attributes["rol"] = null;
+			return;
+		}
+
+		if(strcasecmp($value, User::ADMINISTRADOR) == 0) {
+			$this->attributes["rol"] = User::ADMINISTRADOR;
+			return;
+		}
+		elseif(strcasecmp($value, User::USUARIO) == 0) {
+			$this->attributes["rol"] = User::USUARIO;
+			return;
+		}
+
+		throw new Exception("Error asignando el rol, rol no reconocido", 1);
+		
 	}
 }
